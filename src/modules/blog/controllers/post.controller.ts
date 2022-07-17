@@ -14,6 +14,7 @@ import {
     CacheInterceptor,
 } from '@nestjs/common';
 
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { isNil } from 'lodash';
 
 import { Public, ReqUser } from '@/modules/user/decorators';
@@ -31,6 +32,8 @@ import { PostService } from '../services';
  * @export
  * @class PostController
  */
+
+@ApiTags('文章')
 @UseInterceptors(CacheInterceptor)
 @Controller('posts')
 export class PostController {
@@ -62,6 +65,7 @@ export class PostController {
     }
 
     @Post()
+    @ApiBearerAuth()
     @SerializeOptions({ groups: ['post-detail'] })
     async store(
         @ReqUser() user: string,
@@ -82,6 +86,7 @@ export class PostController {
      * @param {UpdatePostDto} data 文章数据
      */
     @Patch()
+    @ApiBearerAuth()
     @SerializeOptions({ groups: ['post-detail'] })
     async update(
         @Body()
@@ -95,6 +100,7 @@ export class PostController {
      * @param {string} post 文章ID
      */
     @Delete(':post')
+    @ApiBearerAuth()
     @SerializeOptions({ groups: ['post-detail'] })
     async destroy(
         @Param('post', new ParseUUIDPipe())

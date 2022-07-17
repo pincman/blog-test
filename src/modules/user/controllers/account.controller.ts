@@ -9,6 +9,7 @@ import {
     UseGuards,
     ForbiddenException,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { Guest, Public, ReqUser } from '../decorators';
 
@@ -24,6 +25,7 @@ import { AuthService, UserService } from '../services';
  * @class AccountController
  * @extends {CaptchaController}
  */
+@ApiTags('账户')
 @Controller('account')
 export class AccountController {
     constructor(
@@ -53,6 +55,7 @@ export class AccountController {
      * @param {*} req
      * @memberof AuthController
      */
+    @ApiBearerAuth()
     @Post('logout')
     async logout(@Request() req: any) {
         return this.authService.logout(req);
@@ -66,6 +69,7 @@ export class AccountController {
     @SerializeOptions({
         groups: ['user-item'],
     })
+    @ApiBearerAuth()
     async profile(@ReqUser() user: string) {
         try {
             return await this.userService.findOneById(user);
@@ -82,6 +86,7 @@ export class AccountController {
     @SerializeOptions({
         groups: ['user-item'],
     })
+    @ApiBearerAuth()
     async update(
         @ReqUser() user: string,
         @Body()

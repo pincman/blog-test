@@ -10,7 +10,7 @@ import {
     Query,
     SerializeOptions,
 } from '@nestjs/common';
-import { ApiParam } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiParam, ApiTags } from '@nestjs/swagger';
 
 import { CreateUserDto, QueryUserDto, UpdateUserDto } from '../dtos';
 import { UserEntity } from '../entities';
@@ -22,6 +22,9 @@ import { UserService } from '../services';
  * @export
  * @class UserController
  */
+
+@ApiTags('用户管理')
+@ApiBearerAuth()
 @Controller('users')
 export class UserController {
     constructor(private readonly userService: UserService) {}

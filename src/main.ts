@@ -14,10 +14,10 @@ async function bootstrap() {
     app.setGlobalPrefix('api');
     app.enableCors();
     const config = new DocumentBuilder()
-        .setTitle('forum api')
-        .setDescription('The forum API for swagger')
+        .setTitle('blog api')
+        .setDescription('The blog API for swagger')
         .setVersion('1.0')
-        .addTag('forum')
+        .addTag('blog')
         .build();
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api-docs', app, document);
