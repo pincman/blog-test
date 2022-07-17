@@ -1,0 +1,46 @@
+kind: pipeline
+type: docker
+name: default
+steps:
+    - name: build
+      image: node
+      commands:
+          - npm config set registry https://registry.npmmirror.com/
+          - npm install --save --legacy-peer-deps
+          - npm run build
+          - cp package.json ./dist
+          - cp package-lock.json ./dist
+          - cp ecosystem.config.js ./dist
+    - name: upload
+      image: appleboy/drone-scp
+      settings:
+          host:
+              from_secret: host
+          username:
+              from_secret: username
+          key:
+              from_secret: ssh_key
+          port: 22
+          command_timeout: 2m
+          target: /tmp/forum
+          source:
+              - ./dist
+    - name: deploy
+      image: appleboy/drone-ssh
+      environment:
+          DEPLOY_PATH:
+              from_secret: deploy_path
+      settings:
+          host:
+              from_secret: host
+          username:
+              from_secret: username
+          key:
+              from_secret: ssh_key
+          port: 22
+          command_timeout: 2m
+          envs: [DEPLOY_PATH]
+          script:
+              - rm -rf $${DEPLOY_PATH}
+              - mv /tmp/forum/dist  $${DEPLOY_PATH}
+              - cd $${DEPLOY_PATH} && $HOME/.n/bin/npm install --save --legacy-peer-deps

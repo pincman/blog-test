@@ -1,0 +1,253 @@
+{
+	"info": {
+		"_postman_id": "de038ded-a989-4fd0-8270-a9f65b4b066c",
+		"name": "forum",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15421401"
+	},
+	"item": [
+		{
+			"name": "channel",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/channels",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"channels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/channels/{{channel_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"channels",
+								"{{channel_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"php\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/channels",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"channels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"id\": \"{{channel_id}}\",\n        \"name\": \"nestjs\",\n        \"order\": 1\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/channels",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"channels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/channels/edf91eb0-9e36-4123-be81-46669b912f84",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"channels",
+								"edf91eb0-9e36-4123-be81-46669b912f84"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "message",
+			"item": [
+				{
+					"name": "paginate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/messages",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filter-by-channel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/messages?channel={{channel_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"messages"
+							],
+							"query": [
+								{
+									"key": "channel",
+									"value": "{{channel_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/messages/{{message_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"messages",
+								"{{message_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"这是我的第二帖\",\n    \"content\": \"第二贴内容\",\n    \"channel\": \"{{channel_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/messages",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{message_id}}\",\n    \"title\": \"<script src=\\\"test.js\\\"></script><span style=\\\"background-color:blue\\\">这是我的第一帖</span>\",\n    \"content\": \"<script src=\\\"test.js\\\"></script><span style=\\\"background-color:blue\\\">过滤标签测试</span>\",\n    \"channel\": \"{{channel_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/messages",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/messages/f4f32481-14b8-4635-b4d3-1276b69ed6d4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"messages",
+								"f4f32481-14b8-4635-b4d3-1276b69ed6d4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
